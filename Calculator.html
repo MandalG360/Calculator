@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+
+    <style>.container{
+        text-align: center;
+        margin-top:23px
+    }
+
+    table{
+        margin: auto;
+    }
+
+    input{
+        border-radius: 10px;
+        border: none;
+        font-size:25px;
+        height: 50px;
+        width: 260px;
+        outline: none;
+        text-align: right;
+        padding: 0px 10px;
+        margin-bottom: 5px;
+    }
+
+    button{
+        border-radius: 5px;
+        font-size: 20px;
+        background: #978fa0;
+        width: 60px;
+        height: 40px;
+        margin: 3px;
+    }
+
+    .calculator{ 
+        width: 280px;
+        border: 2px solid #13695d;
+        background-color: #ff99f7;
+        padding: 5px;
+        border-radius: 10px;
+        display: inline-block;
+        
+    }
+
+    h1{
+        font-size: 28px;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .rs{
+        height: 90px;
+        font-size: 35px;
+        font-weight: bold;
+    }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Ashtami Calculator</h1>
+
+        <div class="calculator">
+            <input type="text" name="screen" id="screen" placeholder="How can I help you?" readonly>
+            <table>
+                <tr>
+                    <td><button>(</button></td>
+                    <td><button>)</button></td>
+                    <td><button>C</button></td>
+                    <td><button>←</button></td>
+                </tr>
+                <tr>
+                    <td><button>^</button></td>
+                    <td><button>%</button></td>
+                    <td><button>/</button></td>
+                    <td><button>X</button></td>
+                </tr> 
+                <tr>
+                    <td><button>7</button></td>
+                    <td><button>8</button></td>
+                    <td><button>9</button></td>
+                    <td><button>-</button></td>
+                </tr>
+                <tr>
+                    <td><button>4</button></td>
+                    <td><button>5</button></td>
+                    <td><button>6</button></td>
+                    <td><button>+</button></td>
+                </tr>
+                <tr>
+                    <td><button>1</button></td>
+                    <td><button>2</button></td>
+                    <td><button>3</button></td>
+                    <td rowspan="2"><button class="rs">=</button></td>
+                </tr>
+                <tr>
+                    <td><button>0</button></td>
+                    <td><button>.</button></td>
+                    <td><button>00</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+<script>
+    let screen = document.getElementById('screen');
+    buttons = document.querySelectorAll('button');
+    let screenValue = '';
+    for (item of buttons) {
+        item.addEventListener('click', (e) => {
+            buttonText = e.target.innerText;
+
+            if (buttonText == 'X') {
+                buttonText = '*';
+                screenValue += buttonText;
+                screen.value = screenValue;
+            }
+            else if (buttonText == '^') {
+                buttonText = '**';
+                screenValue += buttonText;
+                screen.value = screenValue;
+            }
+            else if (buttonText == 'C') {
+                screenValue = "";
+                screen.value = screenValue;
+            }
+            else if(buttonText == '←'){
+                screenValue = screen.value.slice(0, -1);
+                screen.value = screenValue;
+            }
+            else if (buttonText == '=') {
+                if(screenValue != "" && screenValue != "undefined"){
+                    screenValue = eval(screenValue);
+                    screen.value = screenValue;
+                }
+            }
+            else {
+                screenValue += buttonText;
+                screen.value = screenValue;
+            }
+        })
+    }
+</script>
+
+</html>
